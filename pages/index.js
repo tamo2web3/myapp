@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 
-class TestIndex extends Component {
+class testIndex extends Component {
   render() {
-
-    return(
-        <div>Hello!!</div>
-    );
+    return (
+        <h1>Hello !!!</h1>
+    )
   }
 };
 
- export default TestIndex;
+ export default testIndex;
