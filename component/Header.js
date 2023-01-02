@@ -12,28 +12,28 @@ const Header = () => {
         </Label>
       </object>
     </Link>
-    <Link route="/indexz">
-      <object>
-        <Label as='a' color='black' tag>
-          <h2>鍛える</h2>
-        </Label>
-      </object>
-    </Link>
-    <Link route="/indexa">
+    <Link route="/heal/indexh">
       <object>
         <Label as='a' color='teal' tag>
           <h2>整える</h2>
         </Label>
       </object>
     </Link>
-      <Link route="/indexb">
+    <Link route="/play/indexp">
         <object>
           <Label as='a' color='orange' tag>
-            <h2>遊ぶ</h2>
+            <h2>楽しむ</h2>
           </Label>
         </object>
     </Link>
-      <Link route="/indexc">
+    <Link route="/train/indext">
+      <object>
+        <Label as='a' color='black' tag>
+          <h2>鍛える</h2>
+        </Label>
+      </object>
+    </Link>
+      <Link route="/event/indexe">
         <object>
           <Label as='a' color='pink' tag>
             <h2>Event</h2>

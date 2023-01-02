@@ -13,7 +13,7 @@ const Layout = (props) => {
           <List.Icon name='mail' />
           <List.Content>
             <List.Header>Contact Me <a href="mailto:tamo2nice@gmail.com">tamo2nice@gmail.com</a></List.Header>
-            <List.Description>  Updated 2022/12/09 </List.Description>
+            <List.Description>  Updated 2023/01/03 </List.Description>
           </List.Content>
         </List.Item>
       </List>
