@@ -106,7 +106,7 @@ class testIndex extends Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Link route="/play/indexh_sn">
+          <Link route="/play/indexp_sn">
             <object>
               <a><Icon name='book' />続き．．．</a>
             </object>

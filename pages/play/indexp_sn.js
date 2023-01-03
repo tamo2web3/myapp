@@ -25,7 +25,7 @@ class testIndex extends Component {
         <Grid.Row columns={2}>
           <Grid.Column>
           <Container fluid>
-            <Header as='h2' color='teal'>スナックサンド</Header>
+            <Header as='h2' color='orange'>スナックサンド</Header>
             <p>
             こだわり食パン！どんな味でも具っとチョイス！！<br/>
             ～フジパンさんHPより～<br/>
