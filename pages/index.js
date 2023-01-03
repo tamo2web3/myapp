@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Label, Grid, Container } from "semantic-ui-react";
-import Layout from "../Component/Layout";
+import Layout from "../component/Layout";
 import Image from "next/image";
 import styles from '../style/Image.module.css';
 import fm0105 from "./fm0105.png";
