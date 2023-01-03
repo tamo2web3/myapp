@@ -6,10 +6,9 @@ const Layout = (props) => {
   return (
     <Container>
       <link async rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.css"/>
-      <Header>
+      <Header />
         {props.children}
         ※スマホの場合、横向きでお願いします
-      </Header>
       <List>
         <List.Item>
           <List.Icon name='mail' />
