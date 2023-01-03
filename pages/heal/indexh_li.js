@@ -58,7 +58,7 @@ class testIndex extends Component {
           </Grid.Column>
           <Grid.Column>
 
-            <iframe src="https://www.youtube.com/embed/YKIXHn3kDL0" title="YouTube video player"　width="450" height="354" ></iframe>
+            <iframe src="https://www.youtube.com/embed/YKIXHn3kDL0" title="YouTube video player"　width="560" height="315" ></iframe>
 
           </Grid.Column>
 
