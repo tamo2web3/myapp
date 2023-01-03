@@ -39,7 +39,7 @@ class testIndex extends Component {
             <p>
               <Link route="https://www.youtube.com/user/saskiasdansschool">
                 <object>
-                  <a>Saskia's Dansschool</a>
+                  <a>Saskia &#39;s Dansschool</a>
                 </object>
               </Link>
             </p>

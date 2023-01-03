@@ -32,15 +32,15 @@ class testIndex extends Component {
               </p>
             <p>
             まろやかなタマゴとハムの組み合わせが好き<br/>
-            <Image src={r01} />
+            <Image src={r01} alt="ham_egg"/>
             </p>
             <p>
             温めた方がピザっぽくなって、ランチにぴったり<br/>
-            <Image src={r02} />
+            <Image src={r02} alt="tomato_cheese"/>
             </p>
             <p>
             モッツアレラチーズの主張しすぎない風味<br/>
-            <Image src={r03} />
+            <Image src={r03} alt="egg_cheese"/>
             </p>
           </Container>
           </Grid.Column>
