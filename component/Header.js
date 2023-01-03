@@ -8,7 +8,7 @@ const Header = () => {
     <Link route="/">
       <object>
         <Label as='a' tag>
-          <h2>Home</h2>
+          <h2>ホーム</h2>
         </Label>
       </object>
     </Link>
@@ -36,7 +36,7 @@ const Header = () => {
       <Link route="/event/indexe">
         <object>
           <Label as='a' color='pink' tag>
-            <h2>Event</h2>
+            <h2>ｲﾍﾞﾝﾄ</h2>
           </Label>
         </object>
     </Link>
