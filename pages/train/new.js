@@ -3,7 +3,7 @@ import { Label, Grid, Image, Segment, Item, Form, Button, Table } from "semantic
 import Youtube from "react-youtube";
 import Layout from "../../component/Layout";
 import { Link } from "../../routes";
-//import "../../style/style.module.css";
+//  import "../../style/style.module.css";
 
 class testIndex0 extends Component {
 

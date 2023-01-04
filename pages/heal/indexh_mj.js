@@ -4,7 +4,7 @@ import { Link } from "../../routes";
 import Layout from "../../component/Layout";
 import styles from '../../style/Image.module.css';
 import Image from "next/image";
-import mj0105 from "../mj0105.png";
+import mj0105 from "../../public/mj0105.png";
 
 class testIndex extends Component {
 

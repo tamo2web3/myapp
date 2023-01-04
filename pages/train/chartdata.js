@@ -11,7 +11,7 @@ class ChartShow extends Component {
     var y = dt.getFullYear();
     var m = ('00' + (dt.getMonth()+1)).slice(-2);
     var d = ('00' + dt.getDate()).slice(-2);
-    return (y + '/' + m + '/' + d);
+    return (m + '/' + d);
   };
 
   getafterndays(n){
@@ -35,7 +35,7 @@ class ChartShow extends Component {
 
   render () {
 
-    let actdays    = ['2022/11/05','2022/11/06','2022/11/13','2022/11/19','2022/11/20', '2022/11/26','2022/11/27','2022/12/03','2022/12/04','2022/12/10'];
+    let actdays    = ['11/05','11/06','11/13','11/19','11/20', '11/26','11/27','12/03','12/04','12/10'];
     let databefore = [53.5, 53.5, 53.5, 54.5, 54.0, 53.5, 53.5, 53.5, 54.0, 54.0];
     let dataafter  = [53.0, 53.0, 52.5, 53.5, 53.0, 52.5, 52.5, 52.5, 53.5, 53.0];
 
@@ -65,7 +65,7 @@ class ChartShow extends Component {
           position: 'top',
         },
         title: {
-          display: true,
+          display: false,
           text: 'Weight Chart',
         },
       },

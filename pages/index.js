@@ -3,14 +3,14 @@ import { Label, Grid, Container } from "semantic-ui-react";
 import Layout from "../component/Layout";
 import Image from "next/image";
 import styles from '../style/Image.module.css';
-import fm0105 from "./fm0105.png";
-import gr0105 from "./gr0105.png";
-import li0105 from "./li0105.png";
-import mj0105 from "./mj0105.png";
-import re0105 from "./re0105.png";
-import tu0105 from "./tu0105.png";
-import zm0105 from "./zm0105.png";
-import sn0105 from "./sn0105.png";
+import fm0105 from "../public/fm0105.png";
+import gr0105 from "../public/gr0105.png";
+import li0105 from "../public/li0105.png";
+import mj0105 from "../public/mj0105.png";
+import re0105 from "../public/re0105.png";
+import tu0105 from "../public/tu0105.png";
+import zm0105 from "../public/zm0105.png";
+import sn0105 from "../public/sn0105.png";
 
 class homeIndex extends Component {
 

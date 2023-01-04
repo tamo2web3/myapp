@@ -7,7 +7,7 @@ import Image from "next/image";
 import r01 from "./1.png";
 import r02 from "./2.png";
 import r03 from "./3.png";
-import sn0105 from "../sn0105.png";
+import sn0105 from "../../public/sn0105.png";
 
 class testIndex extends Component {
 
