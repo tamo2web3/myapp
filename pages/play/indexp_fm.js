@@ -48,6 +48,13 @@ class testIndex extends Component {
             <p>
               今度は近くの唐津城にも登ってみようかな<br/>
             </p>
+
+            <Link route="/play/indexp_fm2">
+              <object>
+                <a>家族旅行（２０２３年始）へ</a>
+              </object>
+            </Link>
+
           </Container>
           </Grid.Column>
           <Grid.Column>
