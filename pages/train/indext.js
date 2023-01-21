@@ -7,7 +7,7 @@ import { Link } from "../../routes";
 import fsPromises from "fs/promises";
 import path from "path";
 
-function renderRow(props){
+function RenderRow(props){
 
   const pres = props.posts;
   const iines = pres.map((pre) => pre.iine);
@@ -49,7 +49,7 @@ function renderRow(props){
 
 }
 
-function renderTable(props){
+function RenderTable(props){
 
   const [iine, setIine] = useState([0,0,0,0,0,0,0,0]);
 
@@ -70,13 +70,13 @@ function renderTable(props){
         </Row>
       </Header>
       <Body>
-        {renderRow(props)}
+        {RenderRow(props)}
       </Body>
     </Table>
   );
 }
 
-function renderRight(){
+function RenderRight(){
 
   const ytt = "YouTube video player" ;
   const ytw = "400";
@@ -93,11 +93,11 @@ function renderRight(){
   );
 }
 
-function renderChart(){
+function RenderChart(){
   //return <ChartData charts = {this.props.gyms} />
 }
 
-export default function trainIndex(props) {
+export default function TrainIndex(props) {
 
     return (
       <Layout>
@@ -105,12 +105,12 @@ export default function trainIndex(props) {
           <Grid.Row columns={2}>
             <Grid.Column  width={10}>
               <h4>Gym Histories</h4>
-              {renderChart()}
-              {renderTable(props)}
+              {RenderChart()}
+              {RenderTable(props)}
             </Grid.Column>
             <Grid.Column  width={3}>
               <h4>Gym Machines</h4>
-              {renderRight()}
+              {RenderRight()}
             </Grid.Column>
           </Grid.Row>
         </Grid>
