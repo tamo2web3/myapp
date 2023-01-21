@@ -1,111 +1,132 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Label, Grid, Image, Segment, Item, Form, Button, Table, Icon } from "semantic-ui-react";
 import Layout from "../../component/Layout"
 import ChartData from "./chartdata";
 import { Link } from "../../routes";
+//import fs from "fs";
+import fsPromises from "fs/promises";
+import path from "path";
 
-class trainIndex extends Component {
+function renderRow(props){
 
-  renderRow(){
+  const pres = props.posts;
+  const iines = pres.map((pre) => pre.iine);
 
-    const { Header, Row, HeaderCell, Body, Cell } = Table;
+  const [iine, setIine] = useState(iines);
 
-    const gym = [
-      { date: "11/05", mac: "400", weight: "53.5 ->53.0", yell: ""},
-      { date: "11/06", mac: "325", weight: "53.5 ->53.0", yell: ""},
-      { date: "11/13", mac: "400", weight: "53.5 ->52.5", yell: "本日もお疲れ様です、ナイストレーニング!!"},
-      { date: "11/19", mac: "425", weight: "54.5 ->53.5", yell: "good"},
-      { date: "11/20", mac: "400", weight: "54.0 ->53.0", yell: "水分も抜けて、体重もしっかり戻ってますね☺"},
-      { date: "11/26", mac: "400", weight: "53.5 ->52.5", yell: "いい調子ですね、12月からも頑張っていきましょう"},
-      { date: "11/27", mac: "400", weight: "53.5 ->52.5", yell: "連日のトレーニングお疲れ様です。本日はコスタリカ戦、私たちも熱い気持ちでトレーニング励みましょう"},
-      { date: "12/03", mac: "400", weight: "53.5 ->52.5", yell: "Goodです"},
-      { date: "12/04", mac: "375", weight: "54.0 ->53.5", yell: "体重が減らないと不安になるかもしれませんが、後から必ず結果がついてきます！頑張りましょう"},
-      { date: "12/10", mac: "400", weight: "54.0 ->53.0", yell: "今年もあとわずかですが、一緒に頑張りましょう"},
-      { date: "12/11", mac: "400", weight: "54.0 ->53.0", yell: "連日お疲れ様です"},
-      { date: "12/17", mac: "400", weight: "53.5 ->53.5", yell: ""},
-      { date: "12/18", mac: "400", weight: "53.5 ->53.5", yell: "ナイストレーニングでーす"},
-      { date: "12/25", mac: "400", weight: "53.0 ->52.0", yell: "メリーX'mas、最近とても寒くなってきましたが体調大丈夫ですか？"},
-      { date: "01/07", mac: "500", weight: "53.5 ->52.5", yell: ""}
-    ];
+  const onClickMessage = (index) => {
+    if (index < 0) return;
+    if (index >= iine.length) return;
 
-    const outgyms = gym.map((v, i) => {
-      return (
-        <Row key={i}>
-          <Cell>{gym[i].date}</Cell>
-          <Cell>{gym[i].mac}</Cell>
-          <Cell>{gym[i].weight}</Cell>
-          <Cell>{gym[i].yell}</Cell>
+    const newAry = [...iine];
+    let temp = newAry[index];
+    let item = String(Number(temp) + 1);
+    newAry.splice(index, 1, item);
+    setIine(newAry);
+  }
+
+  const { Header, Row, HeaderCell, Body, Cell } = Table;
+
+  const gyms = props.posts;
+  const outgyms = gyms.map((gym, index) => {
+    return (
+      <Row key={index}>
+        <Cell>{gym.date}</Cell>
+        <Cell>{gym.kcal}</Cell>
+        <Cell>{gym.weight}</Cell>
+        <Cell>{gym.yell}</Cell>
+        <Cell>
+        <Button onClick={() => onClickMessage(index)} icon>
+          <Icon name='like' color='red' />
+        </Button>
+        </Cell>
+        <Cell>{iine[index]}</Cell>
+      </Row>
+    );
+  });
+
+  return outgyms;
+
+}
+
+function renderTable(props){
+
+  const [iine, setIine] = useState([0,0,0,0,0,0,0,0]);
+
+
+  const { Header, Row, HeaderCell, Body, Cell } = Table;
+
+  return(
+
+    <Table striped fixed color='black' key='black'>
+      <Header>
+        <Row>
+          <HeaderCell width={2}>Date</HeaderCell>
+          <HeaderCell width={2}>Kcal</HeaderCell>
+          <HeaderCell width={3}>Weight</HeaderCell>
+          <HeaderCell width={8}>Message from Gym stuff</HeaderCell>
+          <HeaderCell width={3}>応援💗</HeaderCell>
+          <HeaderCell width={3}>応援数</HeaderCell>
         </Row>
-      );
-    });
+      </Header>
+      <Body>
+        {renderRow(props)}
+      </Body>
+    </Table>
+  );
+}
 
-    return outgyms;
+function renderRight(){
 
-  }
+  const ytt = "YouTube video player" ;
+  const ytw = "400";
+  const yth = "230";
 
-  renderTable(){
-    const { Header, Row, HeaderCell, Body, Cell } = Table;
+  return(
+    <Item>
+      <iframe src="https://www.youtube.com/embed/xOEontwitK4" title={ytt} width={ytw} height={yth} ></iframe>
+      <iframe src="https://www.youtube.com/embed/EiDxYUjHc3E" title={ytt} width={ytw} height={yth} ></iframe>
+      <iframe src="https://www.youtube.com/embed/CdNy715BU6E" title={ytt} width={ytw} height={yth} ></iframe>
+      <iframe src="https://www.youtube.com/embed/6qmDKo7ar6E" title={ytt} width={ytw} height={yth} ></iframe>
+      <iframe src="https://www.youtube.com/embed/JKtSTihxJBM" title={ytt} width={ytw} height={yth} ></iframe>
+    </Item>
+  );
+}
 
-    return(
+function renderChart(){
+  //return <ChartData charts = {this.props.gyms} />
+}
 
-      <Table striped fixed color='black' key='black'>
-        <Header>
-          <Row>
-            <HeaderCell width={3}>Date</HeaderCell>
-            <HeaderCell width={3}>Kcal</HeaderCell>
-            <HeaderCell width={3}>Kg</HeaderCell>
-            <HeaderCell width={10}>Message from Gym stuff</HeaderCell>
-          </Row>
-        </Header>
-        <Body>
-          {this.renderRow()}
-        </Body>
-      </Table>
-    );
-  }
-
-  renderRight(){
-
-    const ytt = "YouTube video player" ;
-    const ytw = "400";
-    const yth = "230";
-
-    return(
-      <Item>
-        <iframe src="https://www.youtube.com/embed/xOEontwitK4" title={ytt} width={ytw} height={yth} ></iframe>
-        <iframe src="https://www.youtube.com/embed/EiDxYUjHc3E" title={ytt} width={ytw} height={yth} ></iframe>
-        <iframe src="https://www.youtube.com/embed/CdNy715BU6E" title={ytt} width={ytw} height={yth} ></iframe>
-        <iframe src="https://www.youtube.com/embed/6qmDKo7ar6E" title={ytt} width={ytw} height={yth} ></iframe>
-        <iframe src="https://www.youtube.com/embed/JKtSTihxJBM" title={ytt} width={ytw} height={yth} ></iframe>
-      </Item>
-    );
-  }
-
-  renderChart(){
-    return <ChartData charts = {this.props.gyms} />
-  }
-
-
-  render() {
+export default function trainIndex(props) {
 
     return (
       <Layout>
-      <Grid divided='vertically'>
-        <Grid.Row columns={2}>
-          <Grid.Column  width={10}>
-            <h4>Gym Histories</h4>
-            {this.renderChart()}
-            {this.renderTable()}
-          </Grid.Column>
-          <Grid.Column  width={3}>
-            <h4>Gym Machines</h4>
-            {this.renderRight()}
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+        <Grid divided='vertically'>
+          <Grid.Row columns={2}>
+            <Grid.Column  width={10}>
+              <h4>Gym Histories</h4>
+              {renderChart()}
+              {renderTable(props)}
+            </Grid.Column>
+            <Grid.Column  width={3}>
+              <h4>Gym Machines</h4>
+              {renderRight()}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </Layout>
     )
-  }
 };
 
- export default trainIndex;
+ export async function getStaticProps() {
+
+   const filePath = path.join(process.cwd(), '//pages/train//Rdata.json');
+   const jsonData = await fsPromises.readFile(filePath);
+   const objectData = JSON.parse(jsonData);
+
+   fsPromises.writeFile("pages/train//Wdata.json", jsonData);
+
+   return {
+     props: objectData
+   }
+ }
