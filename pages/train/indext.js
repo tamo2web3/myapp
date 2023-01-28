@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Label, Grid, Image, Segment, Item, Form, Button, Table, Icon } from "semantic-ui-react";
+import { Link } from "../../routes";
+import FsPromises from "fs/promises";
+import Path from "path";
 import Layout from "../../component/Layout"
 import ChartData from "./chartdata";
-import { Link } from "../../routes";
-//import fs from "fs";
-import fsPromises from "fs/promises";
-import path from "path";
 
 function RenderRow(props){
 
@@ -120,11 +119,11 @@ export default function TrainIndex(props) {
 
  export async function getStaticProps() {
 
-   const filePath = path.join(process.cwd(), '//pages/train//Rdata.json');
-   const jsonData = await fsPromises.readFile(filePath);
+   const filePath = Path.join(process.cwd(), '//pages/train//Rdata.json');
+   const jsonData = await FsPromises.readFile(filePath);
    const objectData = JSON.parse(jsonData);
 
-   fsPromises.writeFile("pages/train//Wdata.json", jsonData);
+   FsPromises.writeFile("pages/train//Wdata.json", jsonData);
 
    return {
      props: objectData
