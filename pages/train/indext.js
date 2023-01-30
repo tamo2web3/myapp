@@ -1,75 +1,72 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Label, Grid, Image, Segment, Item, Form, Button, Table, Icon } from "semantic-ui-react";
-import { Link } from "../../routes";
-import FsPromises from "fs/promises";
-import Path from "path";
-import Layout from "../../component/Layout"
-import ChartData from "./chartdata";
+import Layout from "../../component/Layout";
+import supabase from "../../utils/supabase";
 
-function RenderRow(props){
+function RenderRows(){
+  const [gyms, setGyms] = useState([]);
 
-  const pres = props.posts;
-  const iines = pres.map((pre) => pre.iine);
+  useEffect(() => {
+    fetchTodos()
+  }, [gyms])
 
-  const [iine, setIine] = useState(iines);
-
-  const onClickMessage = (index) => {
-    if (index < 0) return;
-    if (index >= iine.length) return;
-
-    const newAry = [...iine];
-    let temp = newAry[index];
-    let item = String(Number(temp) + 1);
-    newAry.splice(index, 1, item);
-    setIine(newAry);
+  const fetchTodos = async () => {
+    const datas = await supabase.from("gymtrain").select("*");
+    setGyms(datas.data)
   }
 
-  const { Header, Row, HeaderCell, Body, Cell } = Table;
+  const { Row, Cell } = Table;
 
-  const gyms = props.posts;
   const outgyms = gyms.map((gym, index) => {
     return (
-      <Row key={index}>
+      <Row key={gym.id}>
         <Cell>{gym.date}</Cell>
         <Cell>{gym.kcal}</Cell>
         <Cell>{gym.weight}</Cell>
-        <Cell>{gym.yell}</Cell>
+        <Cell>{gym.message}</Cell>
         <Cell>
-        <Button onClick={() => onClickMessage(index)} icon>
-          <Icon name='like' color='red' />
-        </Button>
+          <Button onClick={() => onClickMessage(gym.id, gym.yellcount)} icon>
+            <Icon name='like' color='red' />
+          </Button>
         </Cell>
-        <Cell>{iine[index]}</Cell>
+        <Cell>{gym.yellcount}</Cell>
       </Row>
     );
   });
 
   return outgyms;
+}
+
+async function onClickMessage (gymId, gymYellcount){
+
+  const updates = {
+    id: gymId,
+    yellcount: gymYellcount +1,
+  }
+
+  let { error } = await supabase.from('gymtrain').upsert(updates)
 
 }
 
-function RenderTable(props){
+function RenderLeft(){
 
-  const [iine, setIine] = useState([0,0,0,0,0,0,0,0]);
-
-
-  const { Header, Row, HeaderCell, Body, Cell } = Table;
+  const { Header, Row, HeaderCell, Body } = Table;
 
   return(
 
     <Table striped fixed color='black' key='black'>
       <Header>
         <Row>
-          <HeaderCell width={2}>Date</HeaderCell>
+          <HeaderCell width={4}>Date</HeaderCell>
           <HeaderCell width={2}>Kcal</HeaderCell>
           <HeaderCell width={3}>Weight</HeaderCell>
-          <HeaderCell width={8}>Message from Gym stuff</HeaderCell>
+          <HeaderCell width={7}>Message from Gym stuff</HeaderCell>
           <HeaderCell width={3}>応援💗</HeaderCell>
           <HeaderCell width={3}>応援数</HeaderCell>
         </Row>
       </Header>
       <Body>
-        {RenderRow(props)}
+        {RenderRows()}
       </Body>
     </Table>
   );
@@ -92,20 +89,14 @@ function RenderRight(){
   );
 }
 
-function RenderChart(){
-  //return <ChartData charts = {this.props.gyms} />
-}
-
-export default function TrainIndex(props) {
-
+export default function TrainIndex() {
     return (
       <Layout>
         <Grid divided='vertically'>
           <Grid.Row columns={2}>
             <Grid.Column  width={10}>
               <h4>Gym Histories</h4>
-              {RenderChart()}
-              {RenderTable(props)}
+              {RenderLeft()}
             </Grid.Column>
             <Grid.Column  width={3}>
               <h4>Gym Machines</h4>
@@ -116,16 +107,3 @@ export default function TrainIndex(props) {
       </Layout>
     )
 };
-
- export async function getStaticProps() {
-
-   const filePath = Path.join(process.cwd(), '//pages/train//Rdata.json');
-   const jsonData = await FsPromises.readFile(filePath);
-   const objectData = JSON.parse(jsonData);
-
-   FsPromises.writeFile("pages/train//Wdata.json", jsonData);
-
-   return {
-     props: objectData
-   }
- }

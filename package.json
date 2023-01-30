@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@next/font": "13.0.7",
+    "@supabase/supabase-js": "^2.5.0",
     "axios": "^1.2.3",
     "chart.js": "^4.1.1",
     "eslint": "8.30.0",
@@ -21,5 +22,8 @@
     "react-dom": "^18.0.0",
     "react-youtube": "^10.1.0",
     "semantic-ui-react": "^2.1.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18"
   }
 }

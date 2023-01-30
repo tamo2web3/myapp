@@ -12,9 +12,7 @@ import tu0105 from "../public/tu0105.png";
 import zm0105 from "../public/zm0105.png";
 import sn0105 from "../public/sn0105.png";
 
-class homeIndex extends Component {
-
-  renderList(){
+function renderList(){
 
     let dt = new Date();
     let sc = dt.getSeconds();
@@ -43,16 +41,14 @@ class homeIndex extends Component {
     );
   }
 
-  render() {
+export default function homeIndex() {
+
     return (
       <Layout>
-            <div className={styles.loop_wrap}>
-              {this.renderList()}
-              {this.renderList()}
-            </div>
+        <div className={styles.loop_wrap}>
+          {renderList()}
+          {renderList()}
+        </div>
       </Layout>
     )
-  }
 };
-
- export default homeIndex;
