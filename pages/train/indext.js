@@ -11,7 +11,7 @@ function RenderRows(){
   }, [gyms])
 
   const fetchTodos = async () => {
-    const datas = await supabase.from("gymtrain").select("*");
+    const datas = await supabase.from("gymtrain").select("*").order('date', { ascending: false });
     setGyms(datas.data)
   }
 
