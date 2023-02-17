@@ -20,53 +20,7 @@ import s15 from "./15.png";
 import s16 from "./16.png";
 import s17 from "./17.png";
 
-function Left(){
-  return(
-    <Container fluid>
-      <p>
-        <a class="ui yellow circular label">第1位</a>
-        モッツアレラチーズの主張しすぎない風味<br/>
-        <Image src={s03} alt="egg_cheese"/>
-      </p>
-      <p>
-        <a class="ui grey circular label">第2位</a>
-        まろやかなタマゴとハムの組み合わせが好き<br/>
-        <Image src={s01} alt="ham_egg"/>
-      </p>
-      <p>
-          <a class="ui brown circular label">第3位</a>
-          温めた方がピザっぽくなって、ランチにぴったり<br/>
-          <Image src={s02} alt="tomato_cheese"/>
-      </p>
-
-    </Container>
-  )
-}
-
-async function updateDatabase (id, osusume, want, txt){
-
-  const datas = await supabase.from("snack").select("*").eq('id', id);
-
-  let voteCast = Number(datas.data[0].voteCast) + 1;
-  let voteOsusume = Number(datas.data[0].voteOsusume) + Number(osusume);
-  let voteWant = Number(datas.data[0].voteWant) + Number(want);
-
-  const updates = {
-    id: id,
-    voteCast: voteCast,
-    voteOsusume: voteOsusume,
-    voteWant: voteWant,
-  }
-  let { error } = await supabase.from('snack').upsert(updates);
-
-  const upserts = {
-    keyId: id,
-    Comment: txt
-  }
-  let { error2 } = await supabase.from('snackStat').insert(upserts);
-}
-
-function RightUp()
+function Ups()
 {
 
   const options = [
@@ -162,61 +116,50 @@ function RightUp()
   return(
     <Container>
       <Form>
-        <Grid divided='vertically'>
-          <Grid.Row columns={2}>
-            <Grid.Column>
-              <Menu compact>
-                <Dropdown
-                  text="投票したい商品を選んでください"
-                  options={options}
-                  onChange={ (e, data) => onChangeName(e, data) }
-                  simple item />
-              </Menu>
-              <br/>
-              <br/>
-              <p>
-                <Image src={src} alt="photo_snacksand"/>
-              </p>
-            </Grid.Column>
-            <Grid.Column>
-              <table class="ui celled table">
-                <tbody>
-                  <tr>
-                    <td data-label="Name">エネルギー[kcal]</td>
-                    <td data-label="Prop">{energy}</td>
-                  </tr>
-                  <tr>
-                    <td data-label="Name">たんぱく質[g]</td>
-                    <td data-label="Prop">{protein}</td>
-                  </tr>
-                  <tr>
-                    <td data-label="Name">炭水化物[g]</td>
-                    <td data-label="Prop">{carbohydrates}</td>
-                  </tr>
-                  <tr>
-                    <td data-label="Name">脂質[g]</td>
-                    <td data-label="Prop">{fat}</td>
-                  </tr>
-                  <tr>
-                    <td data-label="Name">食塩相当量[g]</td>
-                    <td data-label="Prop">{saltEquivalent}</td>
-                  </tr>
-                  <tr>
-                    <td data-label="Name">コレステロール[mg]</td>
-                    <td data-label="Prop">{cholesterol}</td>
-                  </tr>
-                </tbody>
-              </table>
 
-            </Grid.Column>
-            </Grid.Row>
-        </Grid>
+        <Menu >
+          <Dropdown fluid dropdown
+            text="人気投票にご協力ください"
+            options={options}
+            onChange={ (e, data) => onChangeName(e, data) }
+            simple item />
+        </Menu>
+
+        <table class="ui celled structured table">
+          <tbody>
+            <tr>
+              <td rowspan="6" width="30%"><Image src={src} alt="photo_snacksand"/></td>
+              <td width="50%">エネルギー[kcal]</td>
+              <td width="20%">{energy}</td>
+            </tr>
+            <tr>
+              <td>たんぱく質[g]</td>
+              <td>{protein}</td>
+            </tr>
+            <tr>
+              <td>炭水化物[g]</td>
+              <td>{carbohydrates}</td>
+            </tr>
+            <tr>
+              <td>脂質[g]</td>
+              <td>{fat}</td>
+            </tr>
+            <tr>
+              <td>食塩相当量[g]</td>
+              <td>{saltEquivalent}</td>
+            </tr>
+            <tr>
+              <td>コレステロール[mg]</td>
+              <td>{cholesterol}</td>
+            </tr>
+          </tbody>
+        </table>
 
         <table class="ui celled table">
           <tbody>
             <tr>
-              <td data-label="Name">おすすめ度：{osusume}</td>
-              <td data-label="Prop">
+              <td  width="30%">おすすめ度：{osusume}％</td>
+              <td>
                 <Form.Input
                   min="20" max="100" step="20" type="range"
                   onChange={changeOsusume}
@@ -224,8 +167,8 @@ function RightUp()
               </td>
             </tr>
             <tr>
-              <td data-label="Name">食べたい度：{want}</td>
-              <td data-label="Prop">
+              <td>食べたい度：{want}％</td>
+              <td>
                 <Form.Input
                   min="20" max="100" step="20" type="range"
                   onChange={changeWant}
@@ -236,9 +179,9 @@ function RightUp()
             </tbody>
           </table>
 
-        <div class="ui form">
+        <div class="ui form success">
           <div class="field">
-            <textarea
+            <textarea orange
               placeholder="(入力必須)　おすすめのポイントや、召し上がったご感想など　お願いします。"
               value={txt}
               onChange={onChangeTxt} />
@@ -246,12 +189,145 @@ function RightUp()
         </div>
 
         <p>
-          <button class="massive orange ui button" onClick={onClickVote} id="b1">　投票する　</button>
+          <button class="massive orange ui button" onClick={onClickVote} id="b1">　投票　</button>
         </p>
 
       </Form>
     </Container>
   );
+}
+
+function Downs(){
+  return(
+    <Container fluid>
+      <p>
+        <a class="ui yellow circular label">第1位</a><br/>
+        <Image src={s03} alt="egg_cheese"/><br/>
+        モッツアレラチーズの主張しすぎない風味<br/>
+      </p>
+      <p>
+        <a class="ui grey circular label">第2位</a><br/>
+        まろやかなタマゴとハムの組み合わせが好き<br/>
+        <Image src={s01} alt="ham_egg"/>
+      </p>
+      <p>
+          <a class="ui brown circular label">第3位</a><br/>
+          温めた方がピザっぽくなって、ランチにぴったり<br/>
+          <Image src={s02} alt="tomato_cheese"/>
+      </p>
+    </Container>
+  )
+}
+
+function Test(){
+  return(
+    <table class="ui celled table">
+      <tbody>
+        <tr>
+          <td width="34%">
+            <a class="ui yellow circular label">第1位</a>&emsp;&emsp;エッグ＆チーズ
+          </td>
+          <td width="33%">
+            <a class="ui grey circular label">第2位</a>&emsp;&emsp;ハムタマゴ
+          </td>
+          <td width="33%">
+            <a class="ui brown circular label">第3位</a>&emsp;&emsp;完熟トマト＆とろーりチーズ
+          </td>
+        </tr>
+        <tr>
+          <td>
+            &emsp;&emsp;<Image src={s03} alt="egg_cheese"/><br/>
+            &emsp;&emsp;
+            <div class="ui labeled button" tabindex="0">
+              <div class="ui blue button">
+                <i class="heart icon"></i> &nbsp;Point&nbsp;
+              </div>
+              <a class="ui basic blue left pointing label">
+                100
+              </a>
+            </div>
+            <br/><br/>
+            &emsp;&emsp;
+            <div class="ui labeled button" tabindex="0">
+              <div class="ui orange button">
+                <i class="mail icon"></i> Message
+              </div>
+              <a class="ui basic orange left pointing label">
+                2
+              </a>
+            </div>
+          </td>
+          <td>
+            &emsp;&emsp;<Image src={s01} alt="ham_egg"/><br/>
+            &emsp;&emsp;
+            <div class="ui labeled button" tabindex="0">
+              <div class="ui blue button">
+                <i class="heart icon"></i> &nbsp;Point&nbsp;
+              </div>
+              <a class="ui basic blue left pointing label">
+                95
+              </a>
+            </div>
+            <br/><br/>
+            &emsp;&emsp;
+            <div class="ui labeled button" tabindex="0">
+              <div class="ui orange button">
+                <i class="mail icon"></i> Message
+              </div>
+              <a class="ui basic orange left pointing label">
+                2
+              </a>
+            </div>
+          </td>
+          <td>
+            &emsp;&emsp;<Image src={s02} alt="tomato_cheese"/><br/>
+            &emsp;&emsp;
+            <div class="ui labeled button" tabindex="0">
+              <div class="ui blue button">
+                <i class="heart icon"></i> &nbsp;Point&nbsp;
+              </div>
+              <a class="ui basic blue left pointing label">
+                90
+              </a>
+            </div>
+            <br/><br/>
+            &emsp;&emsp;
+            <div class="ui labeled button" tabindex="0">
+              <div class="ui orange button">
+                <i class="mail icon"></i> Message
+              </div>
+              <a class="ui basic orange left pointing label">
+                1
+              </a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  );
+}
+
+async function updateDatabase (id, osusume, want, txt){
+
+  const datas = await supabase.from("snack").select("*").eq('id', id);
+
+  let voteCast = Number(datas.data[0].voteCast) + 1;
+  let voteOsusume = Number(datas.data[0].voteOsusume) + Number(osusume);
+  let voteWant = Number(datas.data[0].voteWant) + Number(want);
+
+  const updates = {
+    id: id,
+    voteCast: voteCast,
+    voteOsusume: voteOsusume,
+    voteWant: voteWant,
+  }
+  let { error } = await supabase.from('snack').upsert(updates);
+
+  const upserts = {
+    keyId: id,
+    Comment: txt
+  }
+  let { error2 } = await supabase.from('snackStat').insert(upserts);
 }
 
 export default function mainIndex() {
@@ -261,18 +337,9 @@ export default function mainIndex() {
         <Image src={sn0} alt="snack" /><Image src={sn0} alt="snack" />
       </div>
       <Divider section/>
-      <Header as='h2' invert color='orange'>スナックサンド（　人気投票へのご協力を、お願いします！！！　）</Header>
-      <Grid divided='vertically'>
-        <Grid.Row columns={2}>
-          <Grid.Column>
-            {RightUp()}
-          </Grid.Column>
-          <Grid.Column>
-            {Left()}
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-
+      <Header as='h2' invert color='orange'>スナックサンド</Header>
+      {Ups()}
+      {Test()}
       <Divider section/>
     </Layout>
   )
