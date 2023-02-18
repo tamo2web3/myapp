@@ -19,6 +19,7 @@ import s12 from "./12.png";
 import s15 from "./15.png";
 import s16 from "./16.png";
 import s17 from "./17.png";
+import s18 from "./18.png";
 
 function Ups()
 {
@@ -38,6 +39,7 @@ function Ups()
     { key: 15, value: 15 , text: "ピーナツ" },
     { key: 16, value: 16 , text: "焼きそば＆マヨ" },
     { key: 17, value: 17 , text: "生チョコ" },
+    { key: 18, value: 18 , text: "たまご＆かねふくの明太子入りマヨ" },
   ]
 
   const [osusume, setOsusume] = useState(50);
@@ -84,6 +86,7 @@ function Ups()
     else if(Number(data.value)==15) { setSrc(s15); }
     else if(Number(data.value)==16) { setSrc(s16); }
     else if(Number(data.value)==17) { setSrc(s17); }
+    else if(Number(data.value)==18) { setSrc(s18); }
     else{ setSrc(s01); }
   };
 
@@ -104,6 +107,8 @@ function Ups()
       alert("コメントの入力をお願いします");
       return;
     }
+
+    alert("ご協力、ありがとうございました");
 
     updateDatabase(id, osusume, want, txt);
     setOsusume(50);
@@ -197,53 +202,67 @@ function Ups()
   );
 }
 
-function Downs(){
-  return(
-    <Container fluid>
-      <p>
-        <a class="ui yellow circular label">第1位</a><br/>
-        <Image src={s03} alt="egg_cheese"/><br/>
-        モッツアレラチーズの主張しすぎない風味<br/>
-      </p>
-      <p>
-        <a class="ui grey circular label">第2位</a><br/>
-        まろやかなタマゴとハムの組み合わせが好き<br/>
-        <Image src={s01} alt="ham_egg"/>
-      </p>
-      <p>
-          <a class="ui brown circular label">第3位</a><br/>
-          温めた方がピザっぽくなって、ランチにぴったり<br/>
-          <Image src={s02} alt="tomato_cheese"/>
-      </p>
-    </Container>
-  )
+async function selectView() {
+  const datas = await supabase.from("snack_view").select("*");
+
+    return new Promise(function(callback) {
+        setTimeout(function() {
+            callback(datas);
+        }, 1000);
+    });
 }
 
 function Test(){
+
+  const [name1, setName1] = useState();
+  const [name2, setName2] = useState();
+  const [name3, setName3] = useState();
+  const [point1, setPoint1] = useState(0);
+  const [point2, setPoint2] = useState(0);
+  const [point3, setPoint3] = useState(0);
+  const [mail1, setMail1] = useState(0);
+  const [mail2, setMail2] = useState(0);
+  const [mail3, setMail3] = useState(0);
+
+  let viewvals;
+  selectView()
+  .then(function(value){
+     setName1(value.data[0].name);
+     setName2(value.data[1].name);
+     setName3(value.data[2].name);
+     setPoint1(value.data[0].points);
+     setPoint2(value.data[1].points);
+     setPoint3(value.data[2].points);
+     setMail1(value.data[0].mails);
+     setMail2(value.data[1].mails);
+     setMail3(value.data[2].mails);
+
+  });
+
   return(
     <table class="ui celled table">
       <tbody>
         <tr>
           <td width="34%">
-            <a class="ui yellow circular label">第1位</a>&emsp;&emsp;エッグ＆チーズ
+            <a class="ui yellow circular label">第1位</a>&emsp;&emsp;{name1}
           </td>
           <td width="33%">
-            <a class="ui grey circular label">第2位</a>&emsp;&emsp;ハムタマゴ
+            <a class="ui grey circular label">第2位</a>&emsp;&emsp;{name2}
           </td>
           <td width="33%">
-            <a class="ui brown circular label">第3位</a>&emsp;&emsp;完熟トマト＆とろーりチーズ
+            <a class="ui brown circular label">第3位</a>&emsp;&emsp;{name3}
           </td>
         </tr>
         <tr>
           <td>
-            &emsp;&emsp;<Image src={s03} alt="egg_cheese"/><br/>
+            &emsp;&emsp;<Image src={s01} alt="egg_cheese"/><br/>
             &emsp;&emsp;
             <div class="ui labeled button" tabindex="0">
               <div class="ui blue button">
                 <i class="heart icon"></i> &nbsp;Point&nbsp;
               </div>
               <a class="ui basic blue left pointing label">
-                100
+                {point1}
               </a>
             </div>
             <br/><br/>
@@ -253,19 +272,19 @@ function Test(){
                 <i class="mail icon"></i> Message
               </div>
               <a class="ui basic orange left pointing label">
-                2
+                {mail1}
               </a>
             </div>
           </td>
           <td>
-            &emsp;&emsp;<Image src={s01} alt="ham_egg"/><br/>
+            &emsp;&emsp;<Image src={s03} alt="ham_egg"/><br/>
             &emsp;&emsp;
             <div class="ui labeled button" tabindex="0">
               <div class="ui blue button">
                 <i class="heart icon"></i> &nbsp;Point&nbsp;
               </div>
               <a class="ui basic blue left pointing label">
-                95
+                {point2}
               </a>
             </div>
             <br/><br/>
@@ -275,19 +294,19 @@ function Test(){
                 <i class="mail icon"></i> Message
               </div>
               <a class="ui basic orange left pointing label">
-                2
+                {mail2}
               </a>
             </div>
           </td>
           <td>
-            &emsp;&emsp;<Image src={s02} alt="tomato_cheese"/><br/>
+            &emsp;&emsp;<Image src={s17} alt="tomato_cheese"/><br/>
             &emsp;&emsp;
             <div class="ui labeled button" tabindex="0">
               <div class="ui blue button">
                 <i class="heart icon"></i> &nbsp;Point&nbsp;
               </div>
               <a class="ui basic blue left pointing label">
-                90
+                {point3}
               </a>
             </div>
             <br/><br/>
@@ -297,7 +316,7 @@ function Test(){
                 <i class="mail icon"></i> Message
               </div>
               <a class="ui basic orange left pointing label">
-                1
+                {mail3}
               </a>
             </div>
           </td>
