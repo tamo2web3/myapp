@@ -20,6 +20,7 @@ import s15 from "./15.png";
 import s16 from "./16.png";
 import s17 from "./17.png";
 import s18 from "./18.png";
+import s19 from "./19.png";
 
 function Ups()
 {
@@ -40,6 +41,7 @@ function Ups()
     { key: 16, value: 16 , text: "焼きそば＆マヨ" },
     { key: 17, value: 17 , text: "生チョコ" },
     { key: 18, value: 18 , text: "たまご＆かねふくの明太子入りマヨ" },
+    { key: 19, value: 19 , text: "幻の手羽先味" },
   ]
 
   const [osusume, setOsusume] = useState(50);
@@ -72,22 +74,18 @@ function Ups()
         setCholesterol(value.data[0].cholesterol);
       });
     //写真を選択
-    if(Number(data.value)==1) { setSrc(s01); }
-    else if(Number(data.value)==2) { setSrc(s02); }
-    else if(Number(data.value)==3) { setSrc(s03); }
-    else if(Number(data.value)==4) { setSrc(s04); }
-    else if(Number(data.value)==5) { setSrc(s05); }
-    else if(Number(data.value)==6) { setSrc(s06); }
-    else if(Number(data.value)==7) { setSrc(s07); }
-    else if(Number(data.value)==8) { setSrc(s08); }
-    else if(Number(data.value)==9) { setSrc(s09); }
-    else if(Number(data.value)==11) { setSrc(s11); }
-    else if(Number(data.value)==12) { setSrc(s12); }
-    else if(Number(data.value)==15) { setSrc(s15); }
-    else if(Number(data.value)==16) { setSrc(s16); }
-    else if(Number(data.value)==17) { setSrc(s17); }
-    else if(Number(data.value)==18) { setSrc(s18); }
-    else{ setSrc(s01); }
+    const arrSrc = [s01, s02, s03, s04, s05, s06, s07, s08, s09, s11, s12, s15, s16, s17, s18, s19];
+    let arrSlected;
+    let delNumber = 0;
+    if(Number(data.value) < 10){
+      delNumber = -1;
+    } else if (Number(data.value) < 13){
+      delNumber = -2;
+    } else {
+      delNumber = -4;
+    }
+    arrSlected = arrSrc.splice(Number(data.value) + delNumber, 1);
+    setSrc(arrSlected[0]);
   };
 
   async function selectDatabase(id) {
@@ -223,6 +221,9 @@ function Test(){
   const [mail1, setMail1] = useState(0);
   const [mail2, setMail2] = useState(0);
   const [mail3, setMail3] = useState(0);
+  const [id1, setId1] = useState(1);
+  const [id2, setId2] = useState(2);
+  const [id3, setId3] = useState(3);
 
   let viewvals;
   selectView()
@@ -236,8 +237,50 @@ function Test(){
      setMail1(value.data[0].mails);
      setMail2(value.data[1].mails);
      setMail3(value.data[2].mails);
-
+     setId1(value.data[0].id);
+     setId2(value.data[1].id);
+     setId3(value.data[2].id);
   });
+
+  const arrSrc1 = [s01, s02, s03, s04, s05, s06, s07, s08, s09, s11, s12, s15, s16, s17, s18, s19];
+  const arrSrc2  = [...arrSrc1 ];
+  const arrSrc3  = [...arrSrc1 ];
+  let viewId1 = Number(id1);
+  let viewId2 = Number(id2);
+  let viewId3 = Number(id3);
+  let arrSlected1;
+  let arrSlected2;
+  let arrSlected3;
+  let delNumber1 = 0;
+  let delNumber2 = 0;
+  let delNumber3 = 0;
+
+  if(viewId1 < 10){
+    delNumber1 = -1;
+  } else if (viewId1 < 13){
+    delNumber1 = -2;
+  } else {
+    delNumber1 = -4;
+  }
+  arrSlected1 = arrSrc1.splice(viewId1 + delNumber1, 1);
+
+  if(viewId2 < 10){
+    delNumber2 = -1;
+  } else if (viewId2 < 13){
+    delNumber2 = -2;
+  } else {
+    delNumber2 = -4;
+  }
+  arrSlected2 = arrSrc2.splice(viewId2 + delNumber2, 1);
+
+  if(viewId3 < 10){
+    delNumber3 = -1;
+  } else if (viewId3 < 13){
+    delNumber3 = -2;
+  } else {
+    delNumber3 = -4;
+  }
+  arrSlected3 = arrSrc3.splice(viewId3 + delNumber3, 1);
 
   return(
     <table class="ui celled table">
@@ -255,7 +298,7 @@ function Test(){
         </tr>
         <tr>
           <td>
-            &emsp;&emsp;<Image src={s01} alt="egg_cheese"/><br/>
+            &emsp;&emsp;<Image src={arrSlected1[0]} alt="1st_snack"/><br/>
             &emsp;&emsp;
             <div class="ui labeled button" tabindex="0">
               <div class="ui blue button">
@@ -277,7 +320,7 @@ function Test(){
             </div>
           </td>
           <td>
-            &emsp;&emsp;<Image src={s03} alt="ham_egg"/><br/>
+            &emsp;&emsp;<Image src={arrSlected2[0]} alt="2nd_snack"/><br/>
             &emsp;&emsp;
             <div class="ui labeled button" tabindex="0">
               <div class="ui blue button">
@@ -299,7 +342,7 @@ function Test(){
             </div>
           </td>
           <td>
-            &emsp;&emsp;<Image src={s17} alt="tomato_cheese"/><br/>
+            &emsp;&emsp;<Image src={arrSlected3[0]} alt="3rd_snack"/><br/>
             &emsp;&emsp;
             <div class="ui labeled button" tabindex="0">
               <div class="ui blue button">
