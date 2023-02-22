@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Label, Grid, Container } from "semantic-ui-react";
+import { Label, Grid, Container, Icon } from "semantic-ui-react";
+import { Link } from "../routes";
 import Layout from "../component/Layout";
 import Image from "next/image";
 import styles from '../style/Image.module.css';
@@ -41,6 +42,55 @@ function renderList(){
     );
   }
 
+  function renderDown() {
+    return (
+      <div class="ui feed">
+
+      <div class="event">
+        <div class="label">
+          <Icon name='hand point right outline' color='orange' />
+        </div>
+        <div class="content">
+          <div class="date">
+            2023/01/17
+          </div>
+          <div class="summary">
+             We had a delicious and auspicious <Link route="/play/indexp_fm2">family trip</Link> at the beginning of the year.
+          </div>
+        </div>
+      </div>
+
+        <div class="event">
+          <div class="label">
+          <Icon name='hand point right outline' color='black' />
+          </div>
+          <div class="content">
+            <div class="date">
+              2023/02/17
+            </div>
+            <div class="summary">
+               I was cured of my illness and worked up a nice sweat <Link route="/train/indext">at the gym.</Link>
+            </div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="label">
+          <Icon name='hand point right outline' color='orange' />
+          </div>
+          <div class="content">
+            <div class="date">
+              2023/02/22
+            </div>
+            <div class="summary">
+              I have started a popularity contest for our favorite <Link route="/play/indexp_sn">snack sand bread.</Link>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    )
+  }
+
 export default function homeIndex() {
 
     return (
@@ -49,6 +99,7 @@ export default function homeIndex() {
           {renderList()}
           {renderList()}
         </div>
+        {renderDown()}
       </Layout>
     )
 };
