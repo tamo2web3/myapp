@@ -55,7 +55,7 @@ function renderList(){
             2023/01/17
           </div>
           <div class="summary">
-             We had a delicious and auspicious <Link route="/play/indexp_fm2">family trip</Link> at the beginning of the year.
+             We had a delicious and auspicious <u><Link route="/play/indexp_fm2">family trip</Link></u> at the beginning of the year.
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@ function renderList(){
               2023/02/17
             </div>
             <div class="summary">
-               I was cured of my illness and worked up a nice sweat <Link route="/train/indext">at the gym.</Link>
+               I was cured of my illness and worked up a nice sweat <u><Link route="/train/indext">at the gym.</Link></u>
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@ function renderList(){
               2023/02/22
             </div>
             <div class="summary">
-              I have started a popularity contest for our favorite <Link route="/play/indexp_sn">snack sand bread.</Link>
+              I have started a popularity contest for our <u><Link route="/play/indexp_sn">favorite snack sand bread.</Link></u>
             </div>
           </div>
         </div>
