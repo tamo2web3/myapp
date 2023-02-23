@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Label, Grid, Container, Icon } from "semantic-ui-react";
 import { Link } from "../routes";
 import Layout from "../component/Layout";
+import Feed from "../component/Feed";
 import Image from "next/image";
 import styles from '../style/Image.module.css';
 import fm0105 from "../public/fm0105.png";
@@ -45,48 +46,35 @@ function renderList(){
   function renderDown() {
     return (
       <div class="ui feed">
+        <br/>
+        <Feed
+          color="orange"
+          icon="plane"
+          dates="2023/01/17"
+          messages="At the beginning of the year, We had a delicious and auspicious "
+          linkword="family trip"
+          links="/play/indexp_fm2"
+        />
 
-      <div class="event">
-        <div class="label">
-          <Icon name='hand point right outline' color='orange' />
-        </div>
-        <div class="content">
-          <div class="date">
-            2023/01/17
-          </div>
-          <div class="summary">
-             We had a delicious and auspicious <u><Link route="/play/indexp_fm2">family trip</Link></u> at the beginning of the year.
-          </div>
-        </div>
-      </div>
+        <br/>
+        <Feed
+          color="black"
+          icon="hand peace outline"
+          dates="2023/02/17"
+          messages="I was cured of my illness and worked up a nice sweat "
+          linkword="at the gym."
+          links="/train/indext"
+        />
 
-        <div class="event">
-          <div class="label">
-          <Icon name='hand point right outline' color='black' />
-          </div>
-          <div class="content">
-            <div class="date">
-              2023/02/17
-            </div>
-            <div class="summary">
-               I was cured of my illness and worked up a nice sweat <u><Link route="/train/indext">at the gym.</Link></u>
-            </div>
-          </div>
-        </div>
-        <div class="event">
-          <div class="label">
-          <Icon name='hand point right outline' color='orange' />
-          </div>
-          <div class="content">
-            <div class="date">
-              2023/02/22
-            </div>
-            <div class="summary">
-              I have started a popularity contest for our <u><Link route="/play/indexp_sn">favorite snack sand bread.</Link></u>
-            </div>
-          </div>
-        </div>
-
+        <br/>
+        <Feed
+          color="orange"
+          dates="2023/02/22"
+          icon="coffee"
+          messages="I have started a popularity contest for our "
+          linkword="favorite snack sand bread."
+          links="/play/indexp_sn"
+        />
       </div>
     )
   }
