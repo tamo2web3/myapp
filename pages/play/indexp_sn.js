@@ -98,6 +98,35 @@ function Ups()
       });
   }
 
+  async function selectStat(id) {
+    const stat = await supabase.from("snackStat").select("Comment").eq('keyId', id);
+
+      return new Promise(function(callback) {
+          setTimeout(function() {
+              callback(stat);
+          }, 1000);
+      });
+  }
+
+  let n_msg;
+  let msg = "";
+  let msgs = "";
+  const onClickComment = () => {
+      selectStat(id)
+      .then(function(value){
+         n_msg = Number(value.data.length);
+         for (let i = 0; i < n_msg; i++){
+           msg = "コメント" + (i+1) + ": " + value.data[i].Comment + "\n"+ "\n";
+           msgs = msg + msgs;
+        }
+        if (n_msg == 0){
+          alert("メッセージはありません☹")
+        }else{
+          alert(msgs)
+        }
+
+      });
+  }
 
   const onClickVote = () => {
 
@@ -131,7 +160,7 @@ function Ups()
         <table class="ui celled structured table">
           <tbody>
             <tr>
-              <td rowspan="6" width="30%"><Image src={src} alt="photo_snacksand"/></td>
+              <td rowspan="6" width="30%"><Image src={src} alt="photo_snacksand"/><br/><button onClick={onClickComment}>投票した人のコメント</button></td>
               <td width="50%">エネルギー[kcal]</td>
               <td width="20%">{energy}</td>
             </tr>
@@ -210,7 +239,7 @@ async function selectView() {
     });
 }
 
-function Test(){
+function Down(){
 
   const [name1, setName1] = useState();
   const [name2, setName2] = useState();
@@ -225,7 +254,6 @@ function Test(){
   const [id2, setId2] = useState(2);
   const [id3, setId3] = useState(3);
 
-  let viewvals;
   selectView()
   .then(function(value){
      setName1(value.data[0].name);
@@ -401,7 +429,7 @@ export default function mainIndex() {
       <Divider section/>
       <Header as='h2' invert color='orange'>スナックサンド</Header>
       {Ups()}
-      {Test()}
+      {Down()}
       <Divider section/>
     </Layout>
   )
