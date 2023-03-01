@@ -157,6 +157,8 @@ function Ups()
             simple item />
         </Menu>
 
+        <div style ={{color:"red",fontSize:"16px",padding:"10px"}}>※　販売エリアが、九州地区の商品限定の投票となります。</div>
+
         <table class="ui celled structured table">
           <tbody>
             <tr>
