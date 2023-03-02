@@ -21,6 +21,8 @@ import s16 from "./16.png";
 import s17 from "./17.png";
 import s18 from "./18.png";
 import s19 from "./19.png";
+import s20 from "./20.png";
+import s21 from "./21.png";
 
 function Ups()
 {
@@ -42,6 +44,8 @@ function Ups()
     { key: 17, value: 17 , text: "生チョコ" },
     { key: 18, value: 18 , text: "たまご＆かねふくの明太子入りマヨ" },
     { key: 19, value: 19 , text: "幻の手羽先味" },
+    { key: 20, value: 20 , text: "エッグ＆カレー"},
+    { key: 21, value: 21 , text: "コンポタ"},
   ]
 
   const [osusume, setOsusume] = useState(50);
@@ -74,7 +78,7 @@ function Ups()
         setCholesterol(value.data[0].cholesterol);
       });
     //写真を選択
-    const arrSrc = [s01, s02, s03, s04, s05, s06, s07, s08, s09, s11, s12, s15, s16, s17, s18, s19];
+    const arrSrc = [s01, s02, s03, s04, s05, s06, s07, s08, s09, s11, s12, s15, s16, s17, s18, s19, s20, s21];
     let arrSlected;
     let delNumber = 0;
     if(Number(data.value) < 10){
@@ -272,7 +276,7 @@ function Down(){
      setId3(value.data[2].id);
   });
 
-  const arrSrc1 = [s01, s02, s03, s04, s05, s06, s07, s08, s09, s11, s12, s15, s16, s17, s18, s19];
+  const arrSrc1 = [s01, s02, s03, s04, s05, s06, s07, s08, s09, s11, s12, s15, s16, s17, s18, s19, s20, s21];
   const arrSrc2  = [...arrSrc1 ];
   const arrSrc3  = [...arrSrc1 ];
   let viewId1 = Number(id1);
