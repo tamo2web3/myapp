@@ -5,7 +5,6 @@ import Layout from "../../component/Layout";
 import Feed from "../../component/Feed";
 import Image from "next/image";
 import supabase from "../../utils/supabase";
-import rr01 from "./images.png";
 
 async function selectDatabase() {
   const datas = await supabase.from("feed").select("*").order('id', { ascending: true });
