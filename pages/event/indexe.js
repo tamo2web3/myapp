@@ -103,7 +103,7 @@ const FeedState =(feedlist)=> {
 
   const msg = feedlist.map((item) => {
     return (
-      <div class="ui feed">
+      <div class="ui feed" key={item.id}>
         <Feed
           key={item.id}
           color={item.color}
