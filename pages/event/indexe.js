@@ -25,7 +25,7 @@ async function insertDatabase (messages, name, icon, color){
   let { error } = await supabase.from("feed").insert(params);
 }
 
-const ups =()=> {
+const UpsState =()=> {
 
   const icons = [
     { key: 1, value: "coffee" , text: "coffee" },
@@ -99,7 +99,7 @@ const ups =()=> {
   )
 }
 
-const feeds =(feedlist)=> {
+const FeedState =(feedlist)=> {
 
   const msg = feedlist.map((item) => {
     return (
@@ -132,11 +132,11 @@ export default function IndexEvent() {
   return (
     <Layout>
       <Divider section/>
-        {ups()}
+        {UpsState()}
 
       <Divider section/>
         <div class="ui feed">
-        {feeds(feedlist)}
+        {FeedState(feedlist)}
         </div>
     </Layout>
   )
