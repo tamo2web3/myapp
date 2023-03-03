@@ -3,6 +3,13 @@ import { Icon } from "semantic-ui-react";
 import { Link } from "../routes";
 
 const Feed = (props) => {
+
+  let link = props.links;
+  let word = props.linkword;
+
+  if(link==="OMIT"){link = "/";}
+  if(word==="OMIT"){word = "";}
+
   return (
     <div class="event">
       <div class="label">
@@ -14,11 +21,14 @@ const Feed = (props) => {
         <div class="date">
           {props.dates}
         </div>
+        <div class="user">
+          {props.user}
+        </div>
         <div class="summary">
            {props.messages}
            <u>
-           <Link route={props.links}>
-            {props.linkword}
+           <Link route={link}>
+            {word}
            </Link>
            </u>
         </div>

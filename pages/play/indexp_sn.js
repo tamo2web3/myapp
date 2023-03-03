@@ -247,9 +247,8 @@ async function selectView() {
 
 function Down(){
 
-  const [name1, setName1] = useState();
-  const [name2, setName2] = useState();
-  const [name3, setName3] = useState();
+m
+[]
   const [point1, setPoint1] = useState(0);
   const [point2, setPoint2] = useState(0);
   const [point3, setPoint3] = useState(0);

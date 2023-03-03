@@ -36,7 +36,7 @@ const Header = () => {
       <Link route="/event/indexe">
         <object>
           <Label as='a' color='pink' tag>
-            <h2>ｲﾍﾞﾝﾄ</h2>
+            <h2>繋がる</h2>
           </Label>
         </object>
     </Link>

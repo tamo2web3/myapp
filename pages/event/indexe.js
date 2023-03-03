@@ -1,83 +1,144 @@
-import React, { Component } from "react";
-import { Grid, Card, Icon } from "semantic-ui-react";
+import React, { useState } from "react";
+import { Divider, Header, Menu, Dropdown } from "semantic-ui-react";
 import { Link } from "../../routes";
 import Layout from "../../component/Layout";
+import Feed from "../../component/Feed";
 import Image from "next/image";
-import rr01 from "./rr01.png";
-import rr02 from "./rr02.png";
+import supabase from "../../utils/supabase";
+import rr01 from "./images.png";
 
-class testIndex extends Component {
+async function selectDatabase() {
+  const datas = await supabase.from("feed").select("*").order('id', { ascending: true });
 
-  render_leftup(){
-    return(
-      <Card color='pink'>
-        <Image src={rr01} alt="hotel" layout={"intrinsic"} />
-        <Card.Content>
-          <Card.Header>Ticket</Card.Header>
-          <Card.Meta>
-            <span className='date'>リーガロイヤル小倉、 鉄板焼 なにわ</span>
-          </Card.Meta>
-          <Card.Description>
-            　チケット当選したので（2.6万円相当）<br/>
-            <br/>
-            どなたかご一緒に（女性1名、2/末まで）<br/>
-          </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <Link route="https://www.rihga.co.jp/kokura">
-            <object>
-              <a><Icon name='book' />ホテル場所です</a>
-            </object>
-          </Link>
-        </Card.Content>
-      </Card>
-    )
+    return new Promise(function(callback) {
+        setTimeout(function() {
+            callback(datas);
+        }, 1000);
+    });
+}
+
+async function insertDatabase (messages, name, icon, color){
+
+  let inday = new Date();
+  let created = `${inday.getFullYear()}/${inday.getMonth()+1}/${inday.getDate()} ${inday.getHours()}:${inday.getMinutes()}:${inday.getSeconds()}`
+
+  const params = { messages, name, created, icon, color, }
+  let { error } = await supabase.from("feed").insert(params);
+}
+
+const ups =()=> {
+
+  const icons = [
+    { key: 1, value: "coffee" , text: "coffee" },
+    { key: 2, value: "plane" , text: "plane" },
+    { key: 3, value: "hand peace" , text: "hand peace" },
+    { key: 4, value: "comment" , text: "comment" },
+  ]
+
+  const colors = [
+    { key: 1, value: "teal" , text: "teal" },
+    { key: 2, value: "orange" , text: "orange" },
+    { key: 3, value: "black" , text: "black" },
+    { key: 4, value: "pink" , text: "pink" },
+  ]
+
+  const [ msg, setMsg ] = useState("");
+  const [ name, setName ] = useState("");
+  const onChangeMessage = (e) => { setMsg(e.target.value); }
+  const onChangeName = (e) => { setName(e.target.value); }
+  const [ icon, setIcon ] = useState("");
+  const [ color, setColor ] = useState("");
+  // const color = "orange";
+
+  const onChangeIcon = (e, data) => {setIcon(data.value); }
+  const onChangeColor = (e, data) => {setColor(data.value); }
+
+  const onClickComment = () => {
+    if(msg==""){
+      alert("コメントの入力をお願いします");
+      return;
+    }
+
+    insertDatabase(msg, name, icon, color);
+    setMsg("");
+    setName("");
+    document.getElementById("b1").disabled = true;
+    return;
   }
 
-  render_rightup(){
-    return(
-      <Card color='pink'>
-        <Image src={rr02} alt="cource" layout={"intrinsic"} />
-        <Card.Content>
-          <Card.Header>Ticket（追加情報）</Card.Header>
-          <Card.Meta>
-            <span className='date'>Dinnerコース：景～けしき～</span>
-          </Card.Meta>
-          <Card.Description>
-          　ランチにもできるとのこと<br/>
-          <br/>
-          でも一人では、使えない　泣。。。<br/>
-          </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <Link route="https://www.rihga.co.jp/kokura/restaurant/list/teppanyaki/menu/dinner/">
-            <object>
-              <a><Icon name='book' />ディナー内容です</a>
-            </object>
-          </Link>
-        </Card.Content>
-      </Card>
-    )
-  }
+  return(
+    <div>
+      <Menu >
+        <Dropdown fluid dropdown
+          text="アイコン"
+          options={icons}
+          onChange={ (e, data) => onChangeIcon(e, data) }
+          simple item />
+      </Menu>
+      <Menu >
+        <Dropdown fluid dropdown
+          text="カラー"
+          options={colors}
+          onChange={ (e, data) => onChangeColor(e, data) }
+          simple item />
+      </Menu>
+      <div class="ui form success">
+        <div class="field">
+          <input type="text" placeholder="お名前" value={name} onChange={onChangeName} />
+        </div>
+        <div class="field">
+          <textarea pink
+            placeholder="コメント"
+            value={msg}
+            onChange={onChangeMessage} />
+        </div>
+        <p>
+          <button class="large pink ui button" onClick={onClickComment} id="b1">　書込む　</button>
+        </p>
+      </div>
+      </div>
+  )
+}
 
-  render() {
+const feeds =(feedlist)=> {
+
+  const msg = feedlist.map((item) => {
     return (
-      <Layout>
+      <div class="ui feed">
+        <Feed
+          color={item.color}
+          icon={item.icon}
+          dates={item.created}
+          user={item.name}
+          messages={item.messages}
+          linkword="OMIT"
+          links="OMIT"
+        />
+        </div>
+    );
+  })
+  return msg;
+}
 
-      <Grid divided='vertically'>
-        <Grid.Row columns={2}>
-          <Grid.Column>
-            {this.render_leftup()}
-          </Grid.Column>
-          <Grid.Column>
-            {this.render_rightup()}
-          </Grid.Column>
+export default function IndexEvent() {
 
-        </Grid.Row>
-      </Grid>
-      </Layout>
-    )
-  }
+  const [feedlist, setFeedlist] = useState([]);
+
+  selectDatabase()
+  .then(function(value){
+      let temp = [...value.data];
+     setFeedlist(temp);
+  });
+
+  return (
+    <Layout>
+      <Divider section/>
+        {ups()}
+
+      <Divider section/>
+        <div class="ui feed">
+        {feeds(feedlist)}
+        </div>
+    </Layout>
+  )
 };
-
- export default testIndex;
