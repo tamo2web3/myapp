@@ -105,6 +105,7 @@ const FeedState =(feedlist)=> {
     return (
       <div class="ui feed">
         <Feed
+          key={item.id}
           color={item.color}
           icon={item.icon}
           dates={item.created}
