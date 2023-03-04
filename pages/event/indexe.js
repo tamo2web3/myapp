@@ -3,8 +3,10 @@ import { Divider, Header, Menu, Dropdown } from "semantic-ui-react";
 import { Link } from "../../routes";
 import Layout from "../../component/Layout";
 import Feed from "../../component/Feed";
-import Image from "next/image";
 import supabase from "../../utils/supabase";
+import Image from "next/image";
+import cal03a from "./03a.png";
+import cal03b from "./03b.png";
 
 async function selectDatabase() {
   const datas = await supabase.from("feed").select("*").order('id', { ascending: true });
@@ -47,7 +49,6 @@ const UpsState =()=> {
   const onChangeName = (e) => { setName(e.target.value); }
   const [ icon, setIcon ] = useState("");
   const [ color, setColor ] = useState("");
-  // const color = "orange";
 
   const onChangeIcon = (e, data) => {setIcon(data.value); }
   const onChangeColor = (e, data) => {setColor(data.value); }
@@ -82,20 +83,20 @@ const UpsState =()=> {
           simple item />
       </Menu>
       <div class="ui form success">
-        <div class="field">
-          <input type="text" placeholder="お名前" value={name} onChange={onChangeName} />
-        </div>
-        <div class="field">
-          <textarea pink
-            placeholder="コメント"
-            value={msg}
-            onChange={onChangeMessage} />
-        </div>
-        <p>
-          <button class="large pink ui button" onClick={onClickComment} id="b1">　書込む　</button>
-        </p>
+          <div class="field">
+            <input type="text" placeholder="お名前" value={name} onChange={onChangeName} />
+          </div>
+          <div class="field">
+            <textarea pink
+              placeholder="コメント"
+              value={msg}
+              onChange={onChangeMessage} />
+          </div>
+          <p>
+            <button class="large pink ui button" onClick={onClickComment} id="b1">　書込む　</button>
+          </p>
       </div>
-      </div>
+    </div>
   )
 }
 
@@ -132,6 +133,10 @@ export default function IndexEvent() {
 
   return (
     <Layout>
+      <Divider section/>
+      <Image src={cal03a} width="300" height="300" alt="photo_calenderA"/>
+      <Image src={cal03b} width="300" height="300" alt="photo_calenderB"/>
+
       <Divider section/>
         {UpsState()}
 
