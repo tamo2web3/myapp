@@ -75,6 +75,15 @@ function renderList(){
           linkword="favorite snack sand bread."
           links="/play/indexp_sn"
         />
+        <br/>
+        <Feed
+          color="orange"
+          dates="2023/03/12"
+          icon="calendar alternate outline"
+          messages="I have made plans for "
+          linkword="Golden Week 2023."
+          links="/play/indexp_tu"
+        />
       </div>
     )
   }
