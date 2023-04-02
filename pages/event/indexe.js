@@ -7,6 +7,8 @@ import supabase from "../../utils/supabase";
 import Image from "next/image";
 import cal03a from "./03a.png";
 import cal03b from "./03b.png";
+import cal04a from "./04a.png";
+import cal04b from "./04b.png";
 
 async function selectDatabase() {
   const datas = await supabase.from("feed").select("*").order('id', { ascending: true });
@@ -134,8 +136,8 @@ export default function IndexEvent() {
   return (
     <Layout>
       <Divider section/>
-      <Image src={cal03a} width="300" height="300" alt="photo_calenderA"/>
-      <Image src={cal03b} width="300" height="300" alt="photo_calenderB"/>
+      <Image src={cal04a} width="300" height="300" alt="photo_calenderA"/>
+      <Image src={cal04b} width="300" height="300" alt="photo_calenderB"/>
 
       <Divider section/>
         {UpsState()}

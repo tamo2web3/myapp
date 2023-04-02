@@ -32,19 +32,15 @@ class testIndex extends Component {
             <p style={{fontSize:"18px", color:"red"}} >2023年のGWは、山口にしよう。～～～～</p>
 
             <p>
-              <div style={{color:"orange"}}>メイン（4/30?）</div>
-              <div>&emsp;&emsp;元乃隅稲成神社を訪ねる&emsp;&emsp;⇒角島大橋の絶景を満喫する</div>
+              <div style={{color:"orange"}}>メイン（5/2）</div>
+              <div>&emsp;&emsp;角島大橋の絶景を満喫する</div>
             </p>
             <p>
-              <div style={{color:"orange"}}>サブ(5/02?)</div>
-              <div>&emsp;&emsp;広大な秋吉台をサイクリング&emsp;&emsp;⇒秋芳洞の探検もセットで</div>
+              <div style={{color:"orange"}}>サブ(5/03)</div>
+              <div>&emsp;&emsp;元乃隅稲成神社を訪ねる</div>
             </p>
             <p>
-              <div>休憩</div>
-              <div>&emsp;&emsp;温泉につかる&emsp;&emsp;⇒温田温泉でほっこりする</div>
-            </p>
-            <p>
-              <div>〆</div>
+              <div style={{color:"orange"}}>〆(5/04)</div>
               <div>&emsp;&emsp;瓦(かわら)の上でそばを焼いた「瓦そば」</div>
             </p>
 
@@ -66,11 +62,7 @@ class testIndex extends Component {
           </Container>
           </Grid.Column>
           <Grid.Column>
-
-            <p>
-              <iframe src="https://www.google.com/maps/d/embed?mid=1s09ryTIVqf2yHwwen2ISwuzr1Aw8x1I&ehbc=2E312F" width="640" height="480"></iframe>
-            </p>
-
+                <iframe src="https://www.google.com/maps/d/embed?mid=1s09ryTIVqf2yHwwen2ISwuzr1Aw8x1I&ehbc=2E312F" width="560" height="420"></iframe>
           </Grid.Column>
 
           </Grid.Row>
