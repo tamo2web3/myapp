@@ -5,7 +5,7 @@ import Layout from "../component/Layout";
 import Feed from "../component/Feed";
 import Image from "next/image";
 import styles from '../style/Image.module.css';
-import fm0105 from "../public/fm0105.png";
+import fm0305 from "../public/fm0305.png";
 import gr0105 from "../public/gr0105.png";
 import li0105 from "../public/li0105.png";
 import mj0105 from "../public/mj0105.png";
@@ -21,7 +21,7 @@ function renderList(){
     let adr = "";
 
     if (sc < 7.5) {
-      adr = fm0105;
+      adr = fm0305;
     } else if(sc <15){
       adr = gr0105;
     } else if(sc <22.5){
@@ -84,6 +84,17 @@ function renderList(){
           linkword="Golden Week 2023."
           links="/play/indexp_tu"
         />
+        <br/>
+        <Feed
+          color="orange"
+          icon="plane"
+          dates="2023/04/07"
+          messages="In April Event with my family trip in Ashiya@Fukuoka "
+          linkword="family trip"
+          links="/play/indexp_fm3"
+        />
+
+
       </div>
     )
   }
