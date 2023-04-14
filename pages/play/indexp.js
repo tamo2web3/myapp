@@ -70,14 +70,14 @@ class testIndex extends Component {
       <Card color='orange'>
         <Image src={tu04} alt="tunoshima" layout={"intrinsic"} />
         <Card.Content>
-          <Card.Header>角島</Card.Header>
+          <Card.Header>個人旅行</Card.Header>
           <Card.Meta>
-            <span className='date'>青、蒼、碧、藍</span>
+            <span className='date'>Enjoy　My　Life</span>
           </Card.Meta>
           <Card.Description>
-            夏が好き。<br/>
             好きなことの楽しみ方って<br/>
-            人それぞれ　ですよね
+            人それぞれですよね<br/>
+            非日常での癒しが、最高の休日
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
