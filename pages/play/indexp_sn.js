@@ -25,6 +25,7 @@ import s20 from "./20.png";
 import s21 from "./21.png";
 import s22 from "./22.png";
 import s23 from "./23.png";
+import s24 from "./24.png";
 
 function Ups()
 {
@@ -50,6 +51,7 @@ function Ups()
     { key: 21, value: 21 , text: "コンポタ"},
     { key: 22, value: 22 , text: "岩下の新生姜入りタルタルタマゴ"},
     { key: 23, value: 23 , text: "タルタマ"},
+    { key: 24, value: 24 , text: "大人のタマゴ"},
   ]
 
   const [osusume, setOsusume] = useState(50);
@@ -82,7 +84,7 @@ function Ups()
         setCholesterol(value.data[0].cholesterol);
       });
     //写真を選択
-    const arrSrc = [s01, s02, s03, s04, s05, s06, s07, s08, s09, s11, s12, s15, s16, s17, s18, s19, s20, s21, s22, s23];
+    const arrSrc = [s01, s02, s03, s04, s05, s06, s07, s08, s09, s11, s12, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24];
     let arrSlected;
     let delNumber = 0;
     if(Number(data.value) < 10){
@@ -281,7 +283,7 @@ function Down(){
      setId3(value.data[2].id);
   });
 
-  const arrSrc1 = [s01, s02, s03, s04, s05, s06, s07, s08, s09, s11, s12, s15, s16, s17, s18, s19, s20, s21, s22, s23];
+  const arrSrc1 = [s01, s02, s03, s04, s05, s06, s07, s08, s09, s11, s12, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24];
   const arrSrc2  = [...arrSrc1 ];
   const arrSrc3  = [...arrSrc1 ];
   let viewId1 = Number(id1);
